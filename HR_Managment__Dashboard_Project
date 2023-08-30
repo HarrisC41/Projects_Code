@@ -1,0 +1,33 @@
+DAX:
+
+WFH Count = SWITCH(TRUE(),
+'Final Data'[Value] = "WFH",1,
+'Final Data'[Value] = "HWFH",0.5,
+0)
+​
+Month = STARTOFMONTH('Final Data'[Date])
+
+SL Count = SWITCH(TRUE(),
+'Final Data'[Value] = "SL",1,
+'Final Data'[Value] = "HSL",0.5,
+0)
+
+Day of week = FORMAT('Final Data'[Date],"ddd")
+
+Presence % = DIVIDE([Present Days], 'Measure Table'[Total Working Days],0)
+Present Days =
+VAR presentdays = CALCULATE(COUNT('Final Data'[Value]), 'Final Data'[Value]="P")
+RETURN
+presentdays + [WFH Count]
+​
+SL % = DIVIDE([SL Count],[Total Working Days],0)
+​
+SL Count = SUM('Final Data'[SL Count])
+​
+Total Working Days =
+VAR totaldays = COUNT('Final Data'[Value])
+VAR nonworkdays = CALCULATE(COUNT('Final Data'[Value]), 'Final Data'[Value] IN {"WO", "HO"})
+RETURN
+totaldays-nonworkdays
+WFH % = DIVIDE([WFH Count],[Present Days],0)
+WFH Count = SUM('Final Data'[WFH Count])
