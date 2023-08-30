@@ -1,0 +1,32 @@
+EXCEL Formluas:
+
+=IF($H2<=105,"Minimumweight",
+IF($H2<=108,"Jr Flyweight",
+IF($H2<=112,"Flyweight",
+IF($H2<=115,"Super Flyweight",
+IF($H2<=118,"Bantamweight",
+IF($H2<=122,"Super Bantamweight",
+IF($H2<=126,"Featherweightweight",
+IF($H2<=130,"Super Featherweight",
+IF($H2<=135,"Lightweight",
+IF($H2<=140,"Super Lightweight",
+IF($H2<=147,"Welterweight",
+IF($H2<=154,"Super Welterweight",
+IF($H2<=160,"Middleweight",
+IF($H2<=168,"Super Middleweight",
+IF($H2<=175,"Light Heavyweight",
+IF($H2<=200,"Cruiserweight",
+IF($H2>200,"Heavyweight"
+)))))))))))))))))
+
+DAX:
+
+Age Range = SWITCH(TRUE(), 'Boxer Information'[Age] < 30 , "Under 30", 'Boxer Information'[Age] <36 , "30-35 (Prime)", 'Boxer Information'[Age] < 100, "35+")
+
+Win % = 'Boxer Information'[Wins] / 'Boxer Information'[TFights]
+
+% Wins by Knockout = 'Boxer Information'[KO] / 'Boxer Information'[wins]
+
+Wins by Decision = 'Boxer Information'[Wins] - 'Boxer Information'[KO]
+
+Losses By Decision = 'Boxer Information'[Losses] - 'Boxer Information'[L-KO]
